@@ -12,6 +12,7 @@ module.exports = {
         fs.readFile(usersWay, (err, data) => {
             if (err) {
                 console.log(err);
+                return;
             } else {
                 let gotUsers = JSON.parse(data.toString());
                 res.json(gotUsers);
@@ -24,6 +25,7 @@ module.exports = {
         fs.readFile(usersWay, (err, data) => {
             if (err) {
                 console.log(err);
+                return;
             } else {
                 let usersHere = JSON.parse(data.toString());
                 usersHere.push({...req.body, id: db.length + 1});
@@ -31,6 +33,7 @@ module.exports = {
                 fs.writeFile(path.join(usersWay), JSON.stringify(usersHere), (err) => {
                     if (err) {
                         console.log(err);
+                        return;
                     }
                 })
             }
@@ -42,6 +45,7 @@ module.exports = {
         fs.readFile(usersWay, ((err, data) => {
             if (err) {
                 console.log(err);
+                return;
             } else {
                 const specialUser = JSON.parse(data.toString());
                 const {user_id} = req.params;
@@ -56,6 +60,7 @@ module.exports = {
         fs.readFile(usersWay, ((err, data) => {
             if (err) {
                 console.log(err);
+                return;
             } else {
                 const userCheck = JSON.parse(data.toString());
                 const {user_id} = req.params;
