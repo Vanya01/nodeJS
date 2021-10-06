@@ -51,10 +51,12 @@ module.exports = {
         if(err){
             console.log(err);
         }else {
+            let userCheck = JSON.parse(data.toString());
             let {user_id} = req.params;
-            let users = fs.readFile(usersWay);
-            let filteredUser = users.filter(user => user.id !== +user_id);
-            fs.writeFile(usersWay,filteredUser);
+            let filteredUser = userCheck.filter(user => user.id !== +user_id);
+            fs.writeFile(usersWay,JSON.stringify(filteredUser),(err)=>{
+                console.log(err);
+            });
             res.json(filteredUser);
         }
     }));
