@@ -43,13 +43,13 @@
 
 // fs.rename - can move files to different folders
 
-fs.rename(
-    appendFilePath,
-    path.join(mkdirPath,'newFile.txt',(err)=>{
-        console.log(err)
-    }) // connect with previous created way to folder
-    )
-
+// fs.rename(
+//     appendFilePath,
+//     path.join(mkdirPath,'newFile.txt',(err)=>{
+//         console.log(err)
+//     }) // connect with previous created way to folder
+//     )
+//
 
 
 //how to read the file
@@ -100,5 +100,47 @@ fs.rename(
 
 
 
-// __filename - the same, but shows were this variable running example - G:\react-1ls\nodeJS\App.js
+// __filename - the same, but shows were this variable running example - G:\react-1ls\nodeJS\app.js
 // __dirname - is a global variable.It shows were located my file (which I will run ) example - G:\react-1ls\nodeJS
+
+
+
+
+
+///////////////////////////////////////////////lesson 2 ///////////////////////////////////////////////////////
+
+
+// first of all should to install the library 'express' - npm i express
+// then import this library to the project by command -
+// const express = require('express'); // then i should call to the library like a function
+// const app = express()
+// app.listen(5000,()={
+//     console.log(`Some text/host name`)
+//     }
+// )
+
+// http requests - post put delete get connect other are useless
+
+// for example to get smth  - app.get('/',(req,resp)=>{   //req - info from the client could be a costumer or front-end inf
+//                                res.json('some text');
+
+
+                                                           // res - what we sent to the front end developer
+                                                           // when sent some info sent like res.json()
+//
+//
+//
+// }) //  /-is home page,
+
+
+
+
+
+
+
+
+
+
+
+
+
