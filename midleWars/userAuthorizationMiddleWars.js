@@ -1,35 +1,28 @@
-const User = require('../dataBase/User');
 const pass = require('../services/password-services');
-const {login} = require("../Controllers/userLogIn");
+const User = require('../dataBase/User');
 
 module.exports = {
-    checkUserPassword: async (req, res, next) => {
-
+    isPasswordMatched: async (req, res, next) => {
         try {
-            const {email, password} = req.body;
-            const userPassword = await User.findOne({email})
-                .lean()
-                .select('+password');
-            await pass.compare(password, login.password);
-
-            if (!userPassword) {
-                throw new Error('Password incorrect');
-            }
-
+            const {
+                body: {password}, user
+            } = req;
+            await pass.compare(password, user.password);
             next();
         } catch (e) {
-            res.json(e);
+            res.json(e.message);
         }
     },
 
-    checkLogin: async (req, res, next) => {
-
+    isUserPresent: async (req, res, next) => {
         try {
-            const userLogin = await User.findOne({login: req.body.login});
-
-            if (userLogin) {
-                throw new Error('Login incorrect');
+            const user = await User.findOne({email: req.body.email})
+                .select('+password');
+            if (!user) {
+                throw new Error('Wrong user name or password!');
             }
+            req.user = user;
+
             next();
         } catch (e) {
             res.json(e.message);
@@ -38,16 +31,17 @@ module.exports = {
 
     checkUserId: async (req, res, next) => {
         try {
+            const {user_id} = await req.params;
+            const user = await User.findByIdAndUpdate(user_id);
 
-            const uniqueId = await User.findOne({id: req.body.id});
-
-            if (uniqueId) {
-                throw new Error('This id exist');
+            if (!user) {
+                throw new Error('Incorrect User Id!');
             }
+            req.user = user;
 
             next();
-        } catch (e) {
-            res.json(e.message);
+        } catch (err) {
+            res.json(err.message);
         }
     }
 };

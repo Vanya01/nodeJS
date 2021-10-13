@@ -1,12 +1,21 @@
-const userUtil = require('../helper/helper');
+const UsersHere = require('../dataBase/User');
 
 module.exports = {
-    login:  (req, res) => {
+    login: (req, res) => {
         try {
-            const checkEmail = userUtil.userNormalizator(req.body);
-            res.json(checkEmail);
+            res.json('Done!');
         } catch (e) {
             res.json(e.message);
         }
     },
+
+    logout: async (req, res) => {
+        try {
+            const user = await UsersHere.findOne();
+
+            res.json(user);
+        } catch (err) {
+            res.json(err);
+        }
+    }
 };

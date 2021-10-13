@@ -10,8 +10,8 @@ mongoose.connect(MONGO_CONNECT_URL);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-const userRouter = require('./Routes/endpointsOfUsers');
-const authRouter = require('./Routes/userAuthorizationRoute');
+const userRouter = require('./routes/endpointsOfUsers');
+const authRouter = require('./routes/userAuthorizationRoute');
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
