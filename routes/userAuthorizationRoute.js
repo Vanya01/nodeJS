@@ -8,7 +8,5 @@ router.post('/',
     isUserPresent,
     isPasswordMatched,
     authController.login);
-router.post('/logout',
-    authController.logout
-);
+
 module.exports = router;
