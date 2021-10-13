@@ -5,7 +5,8 @@ const passwordServices = require('../services/password-services');
 module.exports = {
     getUsers: async (req, res) => {
         try {
-            const users = await User.find().lean();
+            const users = await User.find()
+                .lean();
 
             res.json(users);
         } catch (e) {
@@ -16,7 +17,8 @@ module.exports = {
     getUsersById: async (req, res) => {
         try {
             const {user_id} = req.params;
-            const useR = await User.findById(user_id).lean();
+            const useR = await User.findById(user_id)
+                .lean();
             const user = userUtil.userNormalizator(useR);
 
             res.json(user);

@@ -1,12 +1,12 @@
 const router = require('express')
     .Router();
 
-const authController = require('../ontrollers/userLogIn');
-const {isUserPresent, isPasswordMatched} = require('../midleWars/userAuthorizationMiddleWars');
+const {authController} = require('../controllers');
+const {authMiddleVar, userMiddleVar} = require('../midleWars/index');
 
 router.post('/',
-    isUserPresent,
-    isPasswordMatched,
+    authMiddleVar.isUserPresent,
+    userMiddleVar.isPasswordMatched,
     authController.login);
 
 module.exports = router;

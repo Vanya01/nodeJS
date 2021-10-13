@@ -3,11 +3,11 @@ const Joi = require('joi');
 const {needs} = require('../Config');
 
 const authValidator = Joi.object({
-    email:Joi
+    email: Joi
         .string()
         .regex(needs.EMAIL_REGEXP)
         .required(),
-    password:Joi
+    password: Joi
         .string()
         .regex(needs.PASSWORD_REGEXP)
         .min(5)
@@ -16,6 +16,6 @@ const authValidator = Joi.object({
         .required()
 });
 
-module.exports={
+module.exports = {
     authValidator
 };

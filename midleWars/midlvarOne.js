@@ -1,32 +1,15 @@
-const User = require('../dataBase/User');
-// const userValidator = require('../validators/validator');
+const pass = require("../services/password-services");
 
 module.exports = {
-    createUserMiddleVar: async (req, res, next) => {
+    isPasswordMatched: async (req, res, next) => {
         try {
-            const userByEmail = await User.findOne({email: req.body.email});
-
-            if (userByEmail) {
-                throw new Error('Email already exist');
-            }
-
+            const {
+                body: {password}, user
+            } = req;
+            await pass.compare(password, user.password);
             next();
         } catch (e) {
             res.json(e.message);
         }
     },
-
-    // isUserPresent: async (req, res, next) => {
-    //     try {
-    //         const {err} = await userValidator.createUserValidator.validate(req.body);
-    //
-    //         if (err) {
-    //             throw new Error(err.details[0].message);
-    //         }
-    //
-    //         next();
-    //     } catch (e) {
-    //         res.json(e.message);
-    //     }
-    // },
 };
