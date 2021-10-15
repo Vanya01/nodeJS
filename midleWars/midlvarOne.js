@@ -9,7 +9,7 @@ module.exports = {
             await pass.compare(password, user.password);
             next();
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 };

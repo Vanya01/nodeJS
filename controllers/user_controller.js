@@ -3,18 +3,18 @@ const userUtil = require('../helper/helper');
 const passwordServices = require('../services/password-services');
 
 module.exports = {
-    getUsers: async (req, res) => {
+    getUsers: async (req, res,next) => {
         try {
             const users = await User.find()
                 .lean();
 
             res.json(users);
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 
-    getUsersById: async (req, res) => {
+    getUsersById: async (req, res,next) => {
         try {
             const {user_id} = req.params;
             const useR = await User.findById(user_id)
@@ -24,11 +24,11 @@ module.exports = {
             res.json(user);
         } catch (e) {
 
-            res.json(e.message);
+            next(e);
         }
     },
 
-    createUser: async (req, res) => {
+    createUser: async (req, res,next) => {
         try {
             const user = req.body;
             const hashedPassword = await passwordServices.hash(req.body.password);
@@ -37,11 +37,11 @@ module.exports = {
             res.json(users);
         } catch (e) {
 
-            res.json(e.message);
+            next(e);
         }
     },
 
-    deleteUser: async (req, res) => {
+    deleteUser: async (req, res,next) => {
         try {
             const {user_id} = req.params;
             let deletedUser = await User.findByIdAndDelete(user_id)
@@ -51,11 +51,11 @@ module.exports = {
             res.json(deletedUser);
         } catch (e) {
 
-            res.json(e.message);
+            next(e);
         }
     },
 
-    updateUser: async (req, res) => {
+    updateUser: async (req, res,next) => {
         try {
             const {user_id} = req.params;
             let updatedUser = await User.findByIdAndUpdate(user_id, req.body)
@@ -65,7 +65,7 @@ module.exports = {
             res.json(updatedUser);
         } catch (e) {
 
-            res.json(e.message);
+            next(e);
         }
     }
 };

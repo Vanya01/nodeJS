@@ -3,7 +3,7 @@ module.exports = {
         try {
             res.json('Signed_In!');
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 };

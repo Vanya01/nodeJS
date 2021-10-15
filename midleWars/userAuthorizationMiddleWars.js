@@ -12,7 +12,7 @@ module.exports = {
 
             next();
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 
@@ -27,8 +27,8 @@ module.exports = {
             req.user = user;
 
             next();
-        } catch (err) {
-            res.json(err.message);
+        } catch (e) {
+            next(e);
         }
     }
 };
