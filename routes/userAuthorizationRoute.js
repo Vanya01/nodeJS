@@ -3,10 +3,21 @@ const router = require('express')
 
 const {authController} = require('../controllers');
 const {authMiddleVar, userMiddleVar} = require('../midleWars/index');
+const {USER, ADMIN} = require('../config/user-role');
 
 router.post('/',
-    authMiddleVar.isUserPresent,
-    userMiddleVar.isPasswordMatched,
+    userMiddleVar.isUserPresent,
+    userMiddleVar.checkUserRole([
+        USER,
+        ADMIN
+    ]),
+    authMiddleVar.isPasswordMatched,
     authController.login);
 
+router.post(
+    '/logout',
+    authController.logout
+);
+
+router.post('/refresh', authController.login);
 module.exports = router;

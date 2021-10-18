@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const {needs} = require('../Config');
+const {needs} = require('../config');
 
 const authValidator = Joi.object({
     email: Joi

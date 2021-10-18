@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 
-const {MONGO_CONNECT_URL, PORT} = require('./Config/config');
+const {MONGO_CONNECT_URL, PORT} = require('./config/config');
 
 const app = express();
 

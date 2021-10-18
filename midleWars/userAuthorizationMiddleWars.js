@@ -1,15 +1,13 @@
 const User = require('../dataBase/User');
+const pass = require('../services/password-services');
 
 module.exports = {
-    isUserPresent: async (req, res, next) => {
+    isPasswordMatched: async (req, res, next) => {
         try {
-            const user = await User.findOne({email: req.body.email})
-                .select('+password');
-            if (!user) {
-                throw new Error('Wrong user name or password!');
-            }
-            req.user = user;
-
+            const {
+                body: {password}, user
+            } = req;
+            await pass.compare(password, user.password);
             next();
         } catch (e) {
             next(e);
