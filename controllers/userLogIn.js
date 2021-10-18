@@ -14,6 +14,8 @@ module.exports = {
 
             const userNormalized = userNormalizator(user);
 
+            console.log(tokenPair);
+
             await o_auth.create({
                 ...tokenPair,
                 user_id: userNormalized._id

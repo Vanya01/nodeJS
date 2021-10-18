@@ -22,6 +22,11 @@ router.get(
     authMiddleVar.checkUserId,
     userController.getUsersById
 );
-router.delete('/:user_id', authMiddleVar.checkUserId, userController.deleteUser);
+router.delete(
+    '/:user_id',
+    authMiddleVar.checkUserId,
+    authMiddleVar.checkAccessToken,
+    userController.deleteUser
+);
 
 module.exports = router;
